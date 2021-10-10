@@ -13,7 +13,7 @@ def input_with_default(label: str, defaults: configparser.ConfigParser, fallback
     """Return the string if non empty otherwise use the default."""
     key = label.replace(" ", "_") if key is None else key
     default = defaults.get("DEFAULT", key, fallback=fallback)
-    prompt = f"{label}: " if default == "" else f"{label} ({default}): "
+    prompt = f"{label}: " if default == "" or default.startswith("{") else f"{label} ({default}): "
     value = input(prompt).strip()
     if value == "":
         return default
